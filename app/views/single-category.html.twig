@@ -1,0 +1,47 @@
+{% extends "index.html.twig" %}
+
+{% use "widgets.html.twig" %}
+{% block body %}
+
+    {{ parent() }}
+
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-lg-9">
+                <h1>{{singleCategory.name}}</h1>
+                <div class="row mt-3">
+                    {% for plant in plants %}
+                        <div class="col-lg-6 col-md-6 col-sm-12 mt-4">
+                            <div class="ms-product-container">
+                                <div class="ms-product-img-container">
+                                    <div class="ms-product-more-layer"></div>
+                                    <button onclick="window.location.href = '/{{ plant.id }}/{{ plant.name | nameToUrl}}'" class="ms-more-btn">Szczegóły</button>
+                                    <img class="ms-product-img" src="http://projekt.dev.cymer.pl/timthumb.php?src=/assets/{{ plant.img }}&w=350&h=350"/>
+                                </div>
+                                <div class="ms-product-description">
+                                    {{ plant.name }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+            <div class="col-lg-3">
+                <h2>Kategorie:</h2>
+                <ul class="category-aside-list">
+                    {% for category in categories %}
+                        <li>
+                            <a href="/kategorie/{{ category.id }}/{{ category.name | nameToUrl}}">{{ category.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% block categories %}
+            {{parent()}}
+
+        {% endblock %}
+    </div>
+
+{% endblock %}

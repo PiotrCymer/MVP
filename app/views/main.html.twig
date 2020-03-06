@@ -1,0 +1,28 @@
+{% extends "index.html.twig" %}
+
+{% use "widgets.html.twig" %}
+{% block body %}
+
+    {{ parent() }}
+
+
+    {% block banner %}
+
+        {{ parent() }}
+
+    {% endblock %}
+    <div class="container">
+        {% block examplePlants %}
+
+            {{ parent() }}
+
+        {% endblock %}
+        {% block gallery %}
+
+            {{ parent() }}
+
+        {% endblock %}
+        <div style="height:500px;">
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,123 @@
+{% block banner %}
+    <div class="container-fluid banner-container">
+        <ul id="banner-list" class="w-100">
+            <li class="banner-slide" id="banner-slide-1">
+                <div class="banner-img-container">
+                    <img class="banner-img" src="http://dev.cymer.pl/projektsem/timthumb.php?src=/img/banner-img-1.jpg&w=1920&h=650"/>
+                </div>
+            </li>
+            <li class="banner-slide" id="banner-slide-2">
+                <div class="banner-img-container">
+                    <img class="banner-img" src="http://dev.cymer.pl/projektsem/timthumb.php?src=/img/banner-img-2.jpg&w=1920&h=650"/>
+                </div>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+{% block examplePlants %}
+    {% if examplePlants %}
+        <div class="row main-site-products single-block">
+            <div class="col-md-12 section-title cornered-title">
+                <h1>Example products</h1>
+            </div>
+            {% for plant in examplePlants %}
+                <div class="col-lg-4 col-md-6 col-sm-12 mt-4">
+                    <div class="ms-product-container">
+                        <div class="ms-product-img-container">
+                            <div class="ms-product-more-layer"></div>
+                            <button onclick="window.location.href = '/{{ plant.id }}/{{ plant.name | nameToUrl}}'" class="ms-more-btn">Szczegóły</button>
+                            <img class="ms-product-img" src="http://projekt.dev.cymer.pl/timthumb.php?src=/assets/{{ plant.img }}&w=350&h=350"/>
+                        </div>
+                        <div class="ms-product-description">
+                            {{ plant.name }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block gallery %}
+    <div class="single-block gallery">
+        <div class="row">
+            <div class="col-md-12 section-title">
+                <h1>Galeria</h1>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-md-12 d-flex justify-content-center align-items-center">
+                <span style="font-size:22px;">Rodzaj:</span>
+                <button class="gallery-filter-btn" data-filter="all">
+                    Wszystkie
+                </button>
+                <button class="gallery-filter-btn" data-filter="1">
+                    Pionowe
+                </button>
+                <button class="gallery-filter-btn" data-filter="2">
+                    Kaktusy
+                </button>
+                <button class="gallery-filter-btn" data-filter="3">
+                    Rozetowe
+                </button>
+                <button class="gallery-filter-btn" data-filter="4">
+                    Łukowe
+                </button>
+            </div>
+        </div>
+        <div class="row gallery" id="gal">
+            {% for gitem in galleryItems %}
+                <div class="col-md-3 gallery-item" data-category="{{gitem.category}}" id="gitem">
+                    <div class="gallery-img">
+                        <img src="http://projekt.dev.cymer.pl/timthumb.php?src=/assets/{{ gitem.image }}&w=250&h=250" data-original="/assets/{{ gitem.image }}"/>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block categories %}
+    <div class="single-block pr-lg-4 pl-lg-3 categories">
+        <div class="row">
+            <div class="col-md-12 section-title cornered-title">
+                <h1>Rodzaje roślin</h1>
+            </div>
+        </div>
+        <div class="row mb-4 categories-widget">
+            <div class="col-lg-6 col-md-12 categories-widget-item">
+                <a href="/kategorie/1/rosliny-pionowe">
+                    <span>Rośliny pionowe</span>
+                    <img src="http://projekt.dev.cymer.pl/timthumb.php?src=/assets/img/fikus.jpeg&w=624&h=543"/>
+                </a>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="row ml-lg-1">
+                    <div class="col-lg-12 categories-widget-item">
+                        <a href="/kategorie/3/rosliny-rozetowe">
+                            <span>
+                                Rośliny rozetowe</span>
+                            <img src="http://projekt.dev.cymer.pl/timthumb.php?src=/assets/img/violet-cat.jpg&w=624&h=310"/>
+                        </a>
+                    </div>
+                    <div class="col-lg-6 categories-widget-item mt-lg-1">
+                        <a href="/kategorie/2/kaktusy">
+                            <span>
+                                Kaktusy</span>
+                            <img src="http://projekt.dev.cymer.pl/timthumb.php?src=/assets/img/mammilaria.jpg&w=624&h=480"/>
+                        </a>
+                    </div>
+                    <div class="col-lg-6 categories-widget-item mt-lg-1 pl-lg-1">
+                        <a href="/kategorie/4/rosliny-lukowe">
+                            <span>
+                                Rośliny łukowe</span>
+                            <img src="http://projekt.dev.cymer.pl/timthumb.php?src=/assets/img/coconout-palm.jpg&w=624&h=480"/>
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>{% endblock %}

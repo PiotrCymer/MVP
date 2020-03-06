@@ -1,0 +1,14 @@
+{
+    "autoload": {
+        "psr-4": {
+            "appEngine\\App\\": "app",
+            "appEngine\\Core\\": "core"
+        }
+    },
+    "require": {
+        "twig/twig": "^2.0",
+        "twig/extensions": "^1.5",
+        "cboden/ratchet": "^0.4.2",
+      "ext-openssl": "*"
+    }
+}

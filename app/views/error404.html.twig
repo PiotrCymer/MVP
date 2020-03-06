@@ -1,0 +1,14 @@
+{% extends "index.html.twig" %}
+
+{% use "widgets.html.twig" %}
+{% block body %}
+
+    {{ parent() }}
+
+    <div class="container error-404-container">
+       <div class="error-404">
+            Błąd 404
+       </div>
+       <span>Przepraszam, strona o podanym adresie nie istnieje.</span>
+    </div>
+{% endblock %}
