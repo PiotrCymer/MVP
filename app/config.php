@@ -6,9 +6,9 @@ return [
         "domain" => "localhost/mvp"
     ],
     "database" => [
-        "login" => "piotrcsql6",
-        "pass" => "Pokemon12321",
+        "login" => "",
+        "pass" => "",
         "host" => "127.0.0.1",
-        "dbName" => "piotrcsql6"
+        "dbName" => ""
     ]
 ];
