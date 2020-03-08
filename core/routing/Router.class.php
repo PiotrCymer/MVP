@@ -17,7 +17,11 @@ class Router
 
     public static $instance;
 
-    private function __construct($url, $collection = null)
+    private $type;
+
+    private $model;
+
+    private function __construct($url)
     {
         $url = explode('?', $url);
         $this->url = $url[0];
@@ -83,7 +87,7 @@ class Router
 
     public function getParams()
     {
-        return $this->params;
+       // return $this->params;
     }
 
     protected function  matchRoute(Route $route)
@@ -153,5 +157,4 @@ class Router
         }
         return false;
     }
-    
 }

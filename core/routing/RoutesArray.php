@@ -53,5 +53,23 @@
               'model' => 'appEngine\App\Models\ApiModel',
               'type' => 'api'
           ]
+      ],
+      'api-get-plants' => [
+          'url' => '/api/getplants',
+          'routerObject' => [
+              'class' => 'appEngine\App\Controllers\ApiController',
+              'method' => 'getPlants',
+              'model' => 'appEngine\App\Models\ApiModel',
+              'type' => 'api'
+              ]
+      ],
+      'api-get-plant' => [
+          'url' => '/api/getsingleplant',
+          'routerObject' => [
+              'class' => 'appEngine\App\Controllers\ApiController',
+              'method' => 'getSinglePlant',
+              'model' => 'appEngine\App\Models\ApiModel',
+              'type' => 'api'
+          ]
       ]
   ];

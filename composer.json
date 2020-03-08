@@ -7,8 +7,6 @@
     },
     "require": {
         "twig/twig": "^2.0",
-        "twig/extensions": "^1.5",
-        "cboden/ratchet": "^0.4.2",
-      "ext-openssl": "*"
+        "twig/extensions": "^1.5"
     }
 }

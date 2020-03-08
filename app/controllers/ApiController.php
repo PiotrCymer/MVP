@@ -8,6 +8,7 @@ use appEngine\Core\helpers as Helpers;
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, PUT, OPTIONS, POST");
 header("Access-Control-Allow-Headers: content-type, authorization");
+header("Content-Type: application/json");
 
 
 
@@ -34,15 +35,22 @@ class ApiController extends Controller
         $this->model = $model;
         $this->currentRoute = $params;
 
-
        switch($_SERVER['REQUEST_METHOD']) {
             case 'GET' :
+
                 $this->requestMethodArray = $_GET;
                 break;
 
             case 'POST':
-                $this->requestMethodArray = $_POST;
+                $postdata = file_get_contents("php://input");
+                $data = json_decode($postdata);
+
+                $this->requestMethodArray = $this->objectToArray($data);
                 break;
+
+           default:
+
+               break;
         }
        $this->credentials = $this->checkCredentials();
 
@@ -58,7 +66,8 @@ class ApiController extends Controller
             if(isset($this->requestMethodArray['login'], $this->requestMethodArray['password'])){
                 return true;
             } else {
-                $this->errorIssue = "No login or password";
+                //$this->errorIssue = $this->requestMethodArray;
+                $this->errorIssue = "No login or password1";
             }
         } else {
             if($_SERVER['HTTP_AUTHORIZATION']) {
@@ -95,13 +104,13 @@ class ApiController extends Controller
                 $this->errorIssue = "Incorrect CREDENTIALS";
             }
         } else {
-            $this->errorIssue = "No password or login";
+            $this->errorIssue = "No password or login2";
         }
-        echo $this->encode($this->errorIssue);
+        echo $this->encode(array("error" => $this->errorIssue));
         return false;
     }
 
-    public function getplants()
+    public function getPlants()
     {
         $plants = $this->model->getPlants();
         echo $this->encode($plants);
@@ -109,8 +118,8 @@ class ApiController extends Controller
 
     public function getSinglePlant()
     {
-        if ($this->get['plantId']) {
-            $id = $this->get['plantId'];
+        if ($this->requestMethodArray['plantId']) {
+            $id = $this->requestMethodArray['plantId'];
             $categories = $this->model->getPlantCategories();
             $plant = $this->model->getPlant($id);
             $dataToSend = array(
@@ -124,9 +133,9 @@ class ApiController extends Controller
     }
     public function updatePlant()
     {
-        if (isset($this->get['plantId'], $this->get['name'], $this->get['categoryId'])) {
-            $this->model->updatePlant($this->get['plantId'], $this->get['name'], $this->get['categoryId']);
-            echo $this->encode(array($this->get['name']));
+        if (isset($this->get['plantId'], $this->requestMethodArray['name'], $this->requestMethodArray['categoryId'])) {
+            $this->model->updatePlant($this->requestMethodArray['plantId'], $this->requestMethodArray['name'], $this->requestMethodArray['categoryId']);
+            echo $this->encode(array($this->requestMethodArray['name']));
         } else {
             echo $this->encode(array("error" => "ERRROR"));
         }
@@ -151,5 +160,18 @@ class ApiController extends Controller
     private function encode($data)
     {
         return json_encode($data);
+    }
+
+
+    public function objectToArray($stdObject) {
+        if (is_object($stdObject)) {
+            $stdObject = get_object_vars($stdObject);
+        }
+
+        if (is_array($stdObject)) {
+            return array_map(__METHOD__, $stdObject);
+        } else {
+            return $stdObject;
+        }
     }
 }
